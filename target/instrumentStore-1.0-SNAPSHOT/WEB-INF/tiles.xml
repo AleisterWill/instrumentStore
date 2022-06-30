@@ -24,4 +24,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
         <put-attribute name="title" value="Search Result" />
         <put-attribute name="CONTENT" value="/WEB-INF/jsp/searchResult.jsp" />
     </definition>
+    <definition name="productDetails" extends="baseLayout">
+        <put-attribute name="title" value="Product Details" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/productDetails.jsp" />
+    </definition>
+    <definition name="productsList" extends="baseLayout">
+        <put-attribute name="title" value="List Products" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/productsList.jsp" />
+    </definition>
 </tiles-definitions>

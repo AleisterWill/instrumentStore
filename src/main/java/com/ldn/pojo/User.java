@@ -73,7 +73,7 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
     @Column(name = "active")
-    private Boolean active;
+    private Short active;
     @Size(max = 10)
     @Column(name = "user_role")
     private String userRole;
@@ -145,11 +145,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Boolean getActive() {
+    public Short getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(Short active) {
         this.active = active;
     }
 

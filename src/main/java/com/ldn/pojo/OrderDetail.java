@@ -27,8 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "OrderDetail.findAll", query = "SELECT o FROM OrderDetail o"),
     @NamedQuery(name = "OrderDetail.findById", query = "SELECT o FROM OrderDetail o WHERE o.id = :id"),
-    @NamedQuery(name = "OrderDetail.findByUnitPrice", query = "SELECT o FROM OrderDetail o WHERE o.unitPrice = :unitPrice"),
-    @NamedQuery(name = "OrderDetail.findByTotalPrice", query = "SELECT o FROM OrderDetail o WHERE o.totalPrice = :totalPrice")})
+    @NamedQuery(name = "OrderDetail.findByQuantity", query = "SELECT o FROM OrderDetail o WHERE o.quantity = :quantity")})
 public class OrderDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,12 +38,8 @@ public class OrderDetail implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "unit_price")
-    private long unitPrice;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "total_price")
-    private long totalPrice;
+    @Column(name = "quantity")
+    private int quantity;
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Order1 orderId;
@@ -59,10 +54,9 @@ public class OrderDetail implements Serializable {
         this.id = id;
     }
 
-    public OrderDetail(Integer id, long unitPrice, long totalPrice) {
+    public OrderDetail(Integer id, int quantity) {
         this.id = id;
-        this.unitPrice = unitPrice;
-        this.totalPrice = totalPrice;
+        this.quantity = quantity;
     }
 
     public Integer getId() {
@@ -73,20 +67,12 @@ public class OrderDetail implements Serializable {
         this.id = id;
     }
 
-    public long getUnitPrice() {
-        return unitPrice;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setUnitPrice(long unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public long getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(long totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Order1 getOrderId() {

@@ -46,7 +46,27 @@
                         </div>
                     </div>
                 </div>
-            </c:forEach>
+            </c:forEach>  
+        </div>
+        <div class="row justify-content-center mt-3">
+            <ul class="pagination justify-content-end">
+                <c:if test="${Math.ceil(countProducts/9) != 0}">
+                    <c:if test="${page != 1}">
+                        <li class="page-item"><a class="page-link" href="<c:url value="/search"/>?kw=${kw}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page-1}"><</a></li>
+                    </c:if>
+                    <c:forEach begin="1" end="${Math.ceil(countProducts/9)}" var="i">
+                        <c:if test="${page == i}">
+                            <li class="page-item active"><a class="page-link" href="<c:url value="/search"/>?kw=${kw}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${i}">${i}</a></li>
+                        </c:if>
+                        <c:if test="${page != i}">
+                            <li class="page-item"><a class="page-link" href="<c:url value="/search"/>?kw=${kw}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${i}">${i}</a></li>
+                        </c:if>
+                    </c:forEach>  
+                    <c:if test="${page != Math.ceil(countProducts/9)}">
+                        <li class="page-item"><a class="page-link" href="<c:url value="/search"/>?kw=${kw}&minPrice=${minPrice}&maxPrice=${maxPrice}&page=${page+1}">></a></li>
+                    </c:if>
+                </c:if>
+            </ul>
         </div>
     </div>
 </div>

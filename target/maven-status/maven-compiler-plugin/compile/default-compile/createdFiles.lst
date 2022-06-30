@@ -5,14 +5,15 @@ com\ldn\controller\SearchController.class
 com\ldn\repository\ProductRepository.class
 com\ldn\pojo\Brand_.class
 com\ldn\repository\repositoryImpl\CategoryRepositoryImpl.class
+com\ldn\pojo\ImageSet.class
 com\ldn\configs\TilesConfig.class
 com\ldn\pojo\Brand.class
 com\ldn\pojo\SubCategory.class
 com\ldn\controller\HomeController.class
 com\ldn\pojo\Order1.class
 com\ldn\pojo\OrderDetail_.class
+com\ldn\controller\ProductController.class
 com\ldn\pojo\Category_.class
-com\ldn\pojo\Storage.class
 com\ldn\service\CategoryService.class
 com\ldn\repository\CategoryRepository.class
 com\ldn\pojo\OrderDetail.class
@@ -21,10 +22,11 @@ com\ldn\configs\WebAppContextConfig.class
 com\ldn\pojo\SubCategory_.class
 com\ldn\pojo\Category.class
 com\ldn\configs\SecurityWebApplicationInitializer.class
+com\ldn\pojo\ImagePath_.class
 com\ldn\pojo\User_.class
-com\ldn\pojo\Storage_.class
 com\ldn\configs\HibernateConfig.class
 com\ldn\pojo\Order1_.class
+com\ldn\pojo\ImageSet_.class
 com\ldn\pojo\User.class
 com\ldn\service\serviceImpl\ProductServiceImpl.class
 com\ldn\pojo\Product_.class
@@ -33,3 +35,4 @@ com\ldn\configs\DispatcherServletInitializer.class
 com\ldn\controller\CommonAttributesController.class
 com\ldn\pojo\Comment_.class
 com\ldn\pojo\Product.class
+com\ldn\pojo\ImagePath.class

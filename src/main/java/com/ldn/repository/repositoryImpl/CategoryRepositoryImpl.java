@@ -31,6 +31,13 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         List<Category> result = q.getResultList();
         return result;
     }
+
+    @Override
+    public Category getCategoryById(int id) {
+        Session session = this.lsfb.getObject().getCurrentSession();
+        Query q = session.createNamedQuery("Category.findById");
+        return (Category) q.getSingleResult();
+    }
     
     
 }

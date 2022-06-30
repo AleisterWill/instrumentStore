@@ -39,8 +39,16 @@ public class SearchController {
         } catch (NumberFormatException ex) { 
         } // Do nothing
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-
-        model.addAttribute("ListProducts", this.productService.getListProduct(keyword, minPrice, maxPrice, page));
+        
+        model.addAttribute("kw", keyword);
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("maxPrice", maxPrice);
+        model.addAttribute("page", page);
+        
+        List<Object[]> Objs = this.productService.getCountAndListProduct(keyword, minPrice, maxPrice, page);
+        
+        model.addAttribute("countProducts", Objs.get(0)[0]);
+        model.addAttribute("ListProducts", Objs.get(1));
 
         return "searchView";
     }

@@ -5,4 +5,4 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<h1>Footer</h1>
+<h1 class="alert alert-success">&copy; Le Dai Nghia 2022</h1>

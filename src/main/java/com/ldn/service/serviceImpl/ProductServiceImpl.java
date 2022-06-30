@@ -21,8 +21,28 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public List<Product> getListProduct(String keyword, Long minPrice, Long maxPrice, int page) {
-        return this.productRepository.getListProduct(keyword, minPrice, maxPrice, page);
+    public List<Object[]> getCountAndListProduct(String keyword, Long minPrice, Long maxPrice, int page) {
+        return this.productRepository.getCountAndListProduct(keyword, minPrice, maxPrice, page);
+    }
+
+    @Override
+    public Product getProductById(int id) {
+        return this.productRepository.getProductById(id);
+    }
+
+    @Override
+    public List<Product> getListRandomRelateProducts(Product p, int maxResults) {
+        return this.productRepository.getListRandomRelateProducts(p, maxResults);
+    }
+
+    @Override
+    public List<Product> getListBestSellers() {
+        return this.productRepository.getListBestSellers();
+    }
+
+    @Override
+    public List<Product> getByCateIdAndSubCateId(int cateId, int subCateId) {
+        return this.productRepository.getByCateIdAndSubCateId(cateId, subCateId);
     }
     
 }

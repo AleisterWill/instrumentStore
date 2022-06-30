@@ -8,13 +8,15 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -22,30 +24,31 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author three
  */
 @Entity
-@Table(name = "storage")
+@Table(name = "image_path")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Storage.findAll", query = "SELECT s FROM Storage s"),
-    @NamedQuery(name = "Storage.findById", query = "SELECT s FROM Storage s WHERE s.id = :id"),
-    @NamedQuery(name = "Storage.findByQuantity", query = "SELECT s FROM Storage s WHERE s.quantity = :quantity")})
-public class Storage implements Serializable {
+    @NamedQuery(name = "ImagePath.findAll", query = "SELECT i FROM ImagePath i"),
+    @NamedQuery(name = "ImagePath.findById", query = "SELECT i FROM ImagePath i WHERE i.id = :id"),
+    @NamedQuery(name = "ImagePath.findByPath", query = "SELECT i FROM ImagePath i WHERE i.path = :path")})
+public class ImagePath implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
-    @Column(name = "quantity")
-    private Integer quantity;
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private Product productId;
+    @Size(max = 5000)
+    @Column(name = "path")
+    private String path;
+    @JoinColumn(name = "image_set_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private ImageSet imageSetId;
 
-    public Storage() {
+    public ImagePath() {
     }
 
-    public Storage(Integer id) {
+    public ImagePath(Integer id) {
         this.id = id;
     }
 
@@ -57,20 +60,20 @@ public class Storage implements Serializable {
         this.id = id;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public String getPath() {
+        return path;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setPath(String path) {
+        this.path = path;
     }
 
-    public Product getProductId() {
-        return productId;
+    public ImageSet getImageSetId() {
+        return imageSetId;
     }
 
-    public void setProductId(Product productId) {
-        this.productId = productId;
+    public void setImageSetId(ImageSet imageSetId) {
+        this.imageSetId = imageSetId;
     }
 
     @Override
@@ -83,10 +86,10 @@ public class Storage implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Storage)) {
+        if (!(object instanceof ImagePath)) {
             return false;
         }
-        Storage other = (Storage) object;
+        ImagePath other = (ImagePath) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -95,7 +98,7 @@ public class Storage implements Serializable {
 
     @Override
     public String toString() {
-        return "com.ldn.pojo.Storage[ id=" + id + " ]";
+        return "com.ldn.pojo.ImagePath[ id=" + id + " ]";
     }
     
 }

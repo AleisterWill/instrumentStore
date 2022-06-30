@@ -4,7 +4,7 @@
  */
 package com.ldn.controller;
 
-import com.ldn.service.CategoryService;
+import com.ldn.service.ProductService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +18,15 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class HomeController {
+    
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("/")
     public String index(Model model,
             @RequestParam(required = false) Map<String, String> params) {
-
+        
+        model.addAttribute("BestSellers", this.productService.getListBestSellers());
         return "index";
     }
 }

@@ -20,16 +20,16 @@
                         ${c.getName()}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="${url}${c.getName()}">Tất cả ${c.getName()}</a>
+                        <a class="dropdown-item" href="${url}cate${c.getId()}">Tất cả ${c.getName()}</a>
                         <c:forEach items="${c.getSubCategoryCollection()}" var="sc">
-                            <a class="dropdown-item" href="${url}${c.getName()}/${sc.getId()}">${sc.getName()}</a>
+                            <a class="dropdown-item" href="${url}cate${c.getId()}?subCate=${sc.getId()}">${sc.getName()}</a>
                         </c:forEach>
                     </div>
                 </li>
             </c:forEach>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="<c:url value="/search"/>">
-            <input class="form-control mr-sm-2" name="keyword" type="search" placeholder="Search" aria-label="Search" >
+            <input class="form-control mr-sm-2" name="kw" type="search" placeholder="Search" aria-label="Search" >
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
