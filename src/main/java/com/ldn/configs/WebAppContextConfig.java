@@ -10,6 +10,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -45,6 +47,18 @@ public class WebAppContextConfig implements WebMvcConfigurer{
                 .addResourceLocations("/resources/images/");
         registry.addResourceHandler("/js/**")
                 .addResourceLocations("/resources/js/");
+    }
+
+    @Override
+    public Validator getValidator() {
+        return validator();
+    }
+    
+    @Bean
+    public LocalValidatorFactoryBean validator() {
+        LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
+        v.setValidationMessageSource(messageSource());
+        return v;
     }
     
     @Bean

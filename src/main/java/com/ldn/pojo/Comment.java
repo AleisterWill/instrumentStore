@@ -5,6 +5,7 @@
 package com.ldn.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -30,7 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c"),
     @NamedQuery(name = "Comment.findById", query = "SELECT c FROM Comment c WHERE c.id = :id"),
-    @NamedQuery(name = "Comment.findByIndex", query = "SELECT c FROM Comment c WHERE c.index = :index")})
+    @NamedQuery(name = "Comment.findByIndex", query = "SELECT c FROM Comment c WHERE c.index = :index"),
+    @NamedQuery(name = "Comment.findByCreatedDate", query = "SELECT c FROM Comment c WHERE c.createdDate = :createdDate")})
 public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,6 +48,11 @@ public class Comment implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "index")
     private String index;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "created_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Product productId;
@@ -58,9 +67,10 @@ public class Comment implements Serializable {
         this.id = id;
     }
 
-    public Comment(Integer id, String index) {
+    public Comment(Integer id, String index, Date createdDate) {
         this.id = id;
         this.index = index;
+        this.createdDate = createdDate;
     }
 
     public Integer getId() {
@@ -77,6 +87,14 @@ public class Comment implements Serializable {
 
     public void setIndex(String index) {
         this.index = index;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public Product getProductId() {

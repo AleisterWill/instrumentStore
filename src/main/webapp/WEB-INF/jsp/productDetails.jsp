@@ -76,7 +76,7 @@
         </li>
         <li class="nav-item" role="presentation">
             <a class="nav-link btn rounded-pill" id="pills-comment-tab" data-toggle="pill" href="#pills-comment" role="tab" aria-controls="pills-comment" aria-selected="false">
-                <i class="fa fa-comment-o"></i> Bình Luận
+                <i class="fa fa-comment-o"></i> Bình Luận (${ListComments.size()})
             </a>
         </li>
     </ul>
@@ -90,15 +90,23 @@
         </div>
 
         <div class="tab-pane fade justify-content-center" id="pills-comment" role="tabpanel" aria-labelledby="pills-comment-tab">
-            <div class="row mb-3">
-                <div class="col-md-1">
-                    <img class="w-100" src="https://res.cloudinary.com/aleisterw/image/upload/v1656569686/default-user_vr4tyj.png" alt="alt"/>
+            <c:forEach items="${ListComments}" var="comment">
+                <div class="row mb-3">
+                    <div class="col-md-1">
+                        <c:if test="${comment.getUserId().getAvatar() != null || comment.getUserId().getAvatar().startsWith('https')}">
+                            <img class="w-100" src="${comment.getUserId().getAvatar()}" alt="alt"/>
+                        </c:if>
+                        <c:if test="${comment.getUserId().getAvatar() == null || !comment.getUserId().getAvatar().startsWith('https')}">
+                            <img class="w-100" src="https://res.cloudinary.com/aleisterw/image/upload/v1656569686/default-user_vr4tyj.png" alt="alt"/>
+                        </c:if>
+                    </div>
+                    <div class="col-md-10 shadow p-3 bg-white rounded mydate">
+                        <h3>${comment.getUserId().getFirstName()} ${comment.getUserId().getLastName()}</h3>
+                        <p>${comment.getIndex()}</p>
+                        <i class="text-muted">${comment.createdDate}</i>
+                    </div>
                 </div>
-                <div class="col-md-10 shadow p-3 bg-white rounded">
-                    <h3>Dai Nghia Le</h3>
-                    <p>Placeholder content for the tab panel. This one relates to the home tab. Takes you miles high, so high, 'cause she’s got that one international smile. There's a stranger in my bed, there's a pounding in my head. Oh, no. In another life I would make you stay. ‘Cause I, I’m capable of anything. Suiting up for my crowning battle. Used to steal your parents' liquor and climb to the roof. Tone, tan fit and ready, turn it up cause its gettin' heavy. Her love is like a drug. I guess that I forgot I had a choice.</p>
-                </div>
-            </div>
+            </c:forEach>
             <div class="row mb-3">
                 <div class="col-md-1">
                     <img class="w-100" src="https://res.cloudinary.com/aleisterw/image/upload/v1656569686/default-user_vr4tyj.png" alt="alt"/>
@@ -204,3 +212,13 @@
 
     </div>
 </div>
+
+<script>
+    window.onload = function () {
+        let dates = document.querySelectorAll(".mydate > i")
+        for (let i = 0; i < dates.length; i++) {
+            let d = dates[i];
+            d.innerText = moment(d.innerText).fromNow();
+        }
+    }
+</script>

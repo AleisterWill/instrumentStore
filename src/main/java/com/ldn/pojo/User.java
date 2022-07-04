@@ -17,10 +17,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -48,18 +51,18 @@ public class User implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{input.nullErr}")
     @Size(min = 1, max = 45)
     @Column(name = "first_name")
     private String firstName;
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{input.nullErr}")
     @Size(min = 1, max = 45)
     @Column(name = "last_name")
     private String lastName;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
-    @NotNull
+    @NotNull(message = "{input.nullErr}")
     @Size(min = 1, max = 45)
     @Column(name = "email")
     private String email;
@@ -68,8 +71,8 @@ public class User implements Serializable {
     @Column(name = "phone")
     private String phone;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @NotNull(message = "{input.nullErr}")
+    @Size(min = 1, max = 1000)
     @Column(name = "password")
     private String password;
     @Column(name = "active")
@@ -77,10 +80,19 @@ public class User implements Serializable {
     @Size(max = 10)
     @Column(name = "user_role")
     private String userRole;
+    @Size(max = 1000)
+    @Column(name = "avatar")
+    private String avatar;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<Comment> commentCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<Order1> order1Collection;
+
+    @Transient
+    private MultipartFile file;
+
+    @Transient
+    private String confirmPW;
 
     public User() {
     }
@@ -161,6 +173,14 @@ public class User implements Serializable {
         this.userRole = userRole;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @XmlTransient
     public Collection<Comment> getCommentCollection() {
         return commentCollection;
@@ -203,5 +223,21 @@ public class User implements Serializable {
     public String toString() {
         return "com.ldn.pojo.User[ id=" + id + " ]";
     }
-    
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+    public String getConfirmPW() {
+        return confirmPW;
+    }
+
+    public void setConfirmPW(String confirmPW) {
+        this.confirmPW = confirmPW;
+    }
+
 }

@@ -5,6 +5,7 @@
 package com.ldn.controller;
 
 import com.ldn.pojo.Product;
+import com.ldn.service.CommentService;
 import com.ldn.service.ProductService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     
+    @Autowired
+    private CommentService commentService;
+    
     @GetMapping("/product/{productId}")
     public String productDetailsView(Model model,
             @PathVariable(value = "productId") int productId) {
@@ -34,6 +38,7 @@ public class ProductController {
         int maxResults = 9;
         model.addAttribute("RelateProducts", this.productService.getListRandomRelateProducts(product, maxResults));
         
+        model.addAttribute("ListComments", this.commentService.getListCommentsByProductId(productId));
         return "productDetails";
     }
     

@@ -32,4 +32,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
         <put-attribute name="title" value="List Products" />
         <put-attribute name="CONTENT" value="/WEB-INF/jsp/productsList.jsp" />
     </definition>
+    <definition name="accounts" extends="baseLayout">
+        <put-attribute name="title" value="Account Symphony!" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/accounts.jsp" />
+    </definition>
 </tiles-definitions>

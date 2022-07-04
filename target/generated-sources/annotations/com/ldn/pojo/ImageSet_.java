@@ -7,7 +7,7 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.9.v20210604-rNA", date="2022-06-29T14:43:57")
+@Generated(value="EclipseLink-2.7.9.v20210604-rNA", date="2022-07-02T16:18:30")
 @StaticMetamodel(ImageSet.class)
 public class ImageSet_ { 
 
