@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -61,8 +62,9 @@ public class UserServiceImpl implements UserService {
         try {
             Map r = this.cloudinary.uploader().upload(user.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
             
-            String pass = user.getPassword();
+            
             user.setAvatar((String) r.get("secure_url"));
+            String pass = user.getPassword();
             user.setUserRole("CUSTOMER");
             user.setPassword(this.pwEncoder.encode(pass));
 
@@ -71,5 +73,30 @@ public class UserServiceImpl implements UserService {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        try {
+            if (user.getFile() != null) {
+                Map r = this.cloudinary.uploader().upload(user.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+                user.setAvatar((String) r.get("secure_url"));
+            }
+            
+            if (user.getNewPW() != null) {
+                user.setPassword(pwEncoder.encode(user.getNewPW()));
+            }
+            
+            return this.userRepository.updateUser(user);
+        } catch(IOException ex) {
+            ex.printStackTrace();
+        }
+        
+        return false;
+    }
+
+    @Override
+    public User getUserById(int id) {
+        return this.userRepository.getUserById(id);
     }
 }

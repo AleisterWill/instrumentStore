@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @author three
  */
 public interface UserService extends UserDetailsService {
+    public User getUserById(int id);
     public List<User> getUsers(String email);
     public boolean addUser(User user);
+    public boolean updateUser(User user);
 }

@@ -22,4 +22,14 @@ public class Utils {
         }
         return q;
     }
+    
+    public static long cartSubTotal(Map<Integer, Cart> cart) {
+        long subTotal = 0;
+        if (cart != null) {
+            for (Cart c : cart.values()) {
+                subTotal += c.getQuantity()*c.getProductPrice();
+            }
+        }
+        return subTotal;
+    }
 }

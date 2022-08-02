@@ -21,8 +21,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Override
-    public List<Object[]> getCountAndListProduct(String keyword, Long minPrice, Long maxPrice, int page) {
-        return this.productRepository.getCountAndListProduct(keyword, minPrice, maxPrice, page);
+    public List<Object[]> getCountAndListProduct(String keyword, Long minPrice, Long maxPrice, String sort, int page) {
+        return this.productRepository.getCountAndListProduct(keyword, minPrice, maxPrice, sort, page);
     }
 
     @Override
@@ -41,8 +41,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getByCateIdAndSubCateId(int cateId, int subCateId) {
-        return this.productRepository.getByCateIdAndSubCateId(cateId, subCateId);
+    public List<Object[]> getByCateIdAndSubCateIdWithCount(int cateId, int subCateId, String sort, int page) {
+        return this.productRepository.getByCateIdAndSubCateIdWithCount(cateId, subCateId, sort, page);
     }
     
 }

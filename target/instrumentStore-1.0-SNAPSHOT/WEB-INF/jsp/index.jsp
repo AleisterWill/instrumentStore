@@ -15,11 +15,11 @@
         <p class="lead">Cho bạn sự hài lòng nhất</p>
         <hr class="my-4">
         <p>Trở thành thành viên của Symphony ngay hôm nay để nhận các ưu đãi hấp dẫn</p>
-        <a class="btn btn-dark btn-lg rounded" href="<c:url value="/signup"/>" role="button">Đăng ký thành viên</a>
+        <a class="btn btn-dark btn-lg rounded" href="<c:url value="/accounts"/>" role="button">Đăng ký thành viên</a>
     </div>
 </div>
 
-    <div class="h3 alert alert-secondary rounded-pill">Best Sellers</div>
+<div class="h3 alert alert-secondary rounded-pill">Best Sellers</div>
 <div class="row mt-3">
     <div id="bestSellersCarousel" class="carousel slide" data-ride="carousel" align="center" >
 
@@ -40,7 +40,14 @@
                     <div class="card-deck carousel-item active">
                         <div class="card-deck justify-content-center">
                             <div class="card col-md-4">
-                                <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i).getId()}"><img src="${BestSellers.get(i).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="..."></a>
+                                <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i).getId()}">
+                                    <c:if test="${BestSellers.get(i).getImageSetId().getImagePathCollection().get(0).getPath() != null && BestSellers.get(i).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
+                                        <img src="${BestSellers.get(i).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="...">
+                                    </c:if>
+                                    <c:if test="${BestSellers.get(i).getImageSetId().getImagePathCollection().get(0).getPath() == null || !BestSellers.get(i).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
+                                        <img src="https://res.cloudinary.com/aleisterw/image/upload/v1656401601/jumbotron_uatrfg.jpg" class="card-img-top h-100" alt="...">
+                                    </c:if>
+                                </a>
                                 <div class="card-body">
                                     <h5 class="card-title">${BestSellers.get(i).getName()}</h5>
                                     <h4 class="card-text text-danger"><strong><fmt:formatNumber value="${BestSellers.get(i).getPrice()}" /> VND</strong></h4>
@@ -48,7 +55,14 @@
                             </div>
                             <c:if test="${i+1 < BestSellers.size()}">
                                 <div class="card col-md-4">
-                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i+1).getId()}"><img src="${BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="..."></a>
+                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i).getId()}">
+                                        <c:if test="${BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath() != null && BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
+                                            <img src="${BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="...">
+                                        </c:if>
+                                        <c:if test="${BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath() == null || !BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
+                                            <img src="https://res.cloudinary.com/aleisterw/image/upload/v1656401601/jumbotron_uatrfg.jpg" class="card-img-top h-100" alt="...">
+                                        </c:if>
+                                    </a>
                                     <div class="card-body">
                                         <h5 class="card-title">${BestSellers.get(i+1).getName()}</h5>
                                         <h4 class="card-text text-danger"><strong><fmt:formatNumber value="${BestSellers.get(i+1).getPrice()}" /> VND</strong></h4>
@@ -58,7 +72,14 @@
                             </c:if>
                             <c:if test="${i+2 < BestSellers.size()}">
                                 <div class="card col-md-4">
-                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i+2).getId()}"><img src="${BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="..."></a>
+                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i).getId()}">
+                                        <c:if test="${BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath() != null && BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
+                                            <img src="${BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="...">
+                                        </c:if>
+                                        <c:if test="${BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath() == null || !BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
+                                            <img src="https://res.cloudinary.com/aleisterw/image/upload/v1656401601/jumbotron_uatrfg.jpg" class="card-img-top h-100" alt="...">
+                                        </c:if>
+                                    </a>
                                     <div class="card-body">
                                         <h5 class="card-title">${BestSellers.get(i+2).getName()}</h5>
                                         <h4 class="card-text text-danger"><strong><fmt:formatNumber value="${BestSellers.get(i+2).getPrice()}" /> VND</strong></h4>
@@ -72,7 +93,14 @@
                     <div class="card-deck carousel-item">
                         <div class="card-deck justify-content-center">
                             <div class="card col-md-4">
-                                <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i).getId()}"><img src="${BestSellers.get(i).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="..."></a>
+                                <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i).getId()}">
+                                    <c:if test="${BestSellers.get(i).getImageSetId().getImagePathCollection().get(0).getPath() != null && BestSellers.get(i).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
+                                        <img src="${BestSellers.get(i).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="...">
+                                    </c:if>
+                                    <c:if test="${BestSellers.get(i).getImageSetId().getImagePathCollection().get(0).getPath() == null || !BestSellers.get(i).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
+                                        <img src="https://res.cloudinary.com/aleisterw/image/upload/v1656401601/jumbotron_uatrfg.jpg" class="card-img-top h-100" alt="...">
+                                    </c:if>
+                                </a>
                                 <div class="card-body">
                                     <h5 class="card-title">${BestSellers.get(i).getName()}</h5>
                                     <h4 class="card-text text-danger"><strong><fmt:formatNumber value="${BestSellers.get(i).getPrice()}" /> VND</strong></h4>
@@ -80,7 +108,14 @@
                             </div>
                             <c:if test="${i+1 < BestSellers.size()}">
                                 <div class="card col-md-4">
-                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i+1).getId()}"><img src="${BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="..."></a>
+                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i).getId()}">
+                                        <c:if test="${BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath() != null && BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
+                                            <img src="${BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="...">
+                                        </c:if>
+                                        <c:if test="${BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath() == null || !BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
+                                            <img src="https://res.cloudinary.com/aleisterw/image/upload/v1656401601/jumbotron_uatrfg.jpg" class="card-img-top h-100" alt="...">
+                                        </c:if>
+                                    </a>
                                     <div class="card-body">
                                         <h5 class="card-title">${BestSellers.get(i+1).getName()}</h5>
                                         <h4 class="card-text text-danger"><strong><fmt:formatNumber value="${BestSellers.get(i+1).getPrice()}" /> VND</strong></h4>
@@ -89,7 +124,14 @@
                             </c:if>
                             <c:if test="${i+2 < BestSellers.size()}">
                                 <div class="card col-md-4">
-                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i+2).getId()}"><img src="${BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="..."></a>
+                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i).getId()}">
+                                        <c:if test="${BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath() != null && BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
+                                            <img src="${BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="...">
+                                        </c:if>
+                                        <c:if test="${BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath() == null || !BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
+                                            <img src="https://res.cloudinary.com/aleisterw/image/upload/v1656401601/jumbotron_uatrfg.jpg" class="card-img-top h-100" alt="...">
+                                        </c:if>
+                                    </a>
                                     <div class="card-body">
                                         <h5 class="card-title">${BestSellers.get(i+2).getName()}</h5>
                                         <h4 class="card-text text-danger"><strong><fmt:formatNumber value="${BestSellers.get(i+2).getPrice()}" /> VND</strong></h4>

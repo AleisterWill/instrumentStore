@@ -4,7 +4,12 @@
  */
 package com.ldn.controller;
 
+import com.ldn.pojo.Cart;
+import com.ldn.pojo.User;
 import com.ldn.service.CategoryService;
+import com.ldn.utils.Utils;
+import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +28,9 @@ public class CommonAttributesController {
     private CategoryService categoryService;
 
     @ModelAttribute
-    public void commonAttr(Model model) {
+    public void commonAttr(Model model, HttpSession session) {
         model.addAttribute("ListCategory", this.categoryService.getListCategory());
+        model.addAttribute("cartCounter", Utils.countCart((Map<Integer, Cart>) session.getAttribute("cart")));
+        model.addAttribute("currentUser", (User) session.getAttribute("currentUser"));
     }
 }

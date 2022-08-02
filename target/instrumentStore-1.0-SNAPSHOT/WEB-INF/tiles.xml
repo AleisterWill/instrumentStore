@@ -36,4 +36,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
         <put-attribute name="title" value="Account Symphony!" />
         <put-attribute name="CONTENT" value="/WEB-INF/jsp/accounts.jsp" />
     </definition>
+    <definition name="setting" extends="baseLayout">
+        <put-attribute name="title" value="Account Symphony!" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/accounts-setting.jsp" />
+    </definition>
+    <definition name="myCart" extends="baseLayout">
+        <put-attribute name="title" value="My Cart" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/myCart.jsp" />
+    </definition>
+    <definition name="checkout" extends="baseLayout">
+        <put-attribute name="title" value="My Cart" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/checkout.jsp" />
+    </definition>
+    <definition name="vnpayreturn" extends="baseLayout">
+        <put-attribute name="title" value="Payment Result" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/vnpayreturn.jsp" />
+    </definition>
 </tiles-definitions>

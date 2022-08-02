@@ -12,9 +12,9 @@ import java.util.List;
  * @author three
  */
 public interface ProductService {
-    public List<Object[]> getCountAndListProduct(String keyword, Long minPrice, Long maxPrice, int page);
+    public List<Object[]> getCountAndListProduct(String keyword, Long minPrice, Long maxPrice, String sort, int page);
     public Product getProductById(int id);
     public List<Product> getListRandomRelateProducts(Product p, int maxResults);
     public List<Product> getListBestSellers();
-    public List<Product> getByCateIdAndSubCateId(int cateId, int subCateId);
+    public List<Object[]> getByCateIdAndSubCateIdWithCount(int cateId, int subCateId, String sort, int page);
 }

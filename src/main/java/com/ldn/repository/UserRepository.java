@@ -12,6 +12,8 @@ import java.util.List;
  * @author three
  */
 public interface UserRepository {
+    public User getUserById(int id);
     public List<User> getUsers(String email);
     public boolean addUser(User user);
+    public boolean updateUser(User user);
 }

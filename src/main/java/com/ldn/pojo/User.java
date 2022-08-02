@@ -93,6 +93,12 @@ public class User implements Serializable {
 
     @Transient
     private String confirmPW;
+    
+    @Transient
+    private String newPW;
+    
+    @Transient
+    private String confirmNewPW;
 
     public User() {
     }
@@ -223,10 +229,10 @@ public class User implements Serializable {
     public String toString() {
         return "com.ldn.pojo.User[ id=" + id + " ]";
     }
-
+    
     public MultipartFile getFile() {
         return file;
-    }
+}
 
     public void setFile(MultipartFile file) {
         this.file = file;
@@ -238,6 +244,34 @@ public class User implements Serializable {
 
     public void setConfirmPW(String confirmPW) {
         this.confirmPW = confirmPW;
+    }
+
+    /**
+     * @return the newPW
+     */
+    public String getNewPW() {
+        return newPW;
+    }
+
+    /**
+     * @param newPW the newPW to set
+     */
+    public void setNewPW(String newPW) {
+        this.newPW = newPW;
+    }
+
+    /**
+     * @return the confirmNewPW
+     */
+    public String getConfirmNewPW() {
+        return confirmNewPW;
+    }
+
+    /**
+     * @param confirmNewPW the confirmNewPW to set
+     */
+    public void setConfirmNewPW(String confirmNewPW) {
+        this.confirmNewPW = confirmNewPW;
     }
 
 }

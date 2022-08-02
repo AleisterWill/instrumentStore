@@ -30,6 +30,7 @@ public class SearchController {
 
         String keyword = params.getOrDefault("kw", "");
         Long minPrice = null, maxPrice = null;
+        String sort = params.getOrDefault("sort", "nameASC");
         try {
             minPrice = Long.parseLong(params.getOrDefault("minPrice", null));
         } catch (NumberFormatException ex) {
@@ -45,7 +46,7 @@ public class SearchController {
         model.addAttribute("maxPrice", maxPrice);
         model.addAttribute("page", page);
         
-        List<Object[]> Objs = this.productService.getCountAndListProduct(keyword, minPrice, maxPrice, page);
+        List<Object[]> Objs = this.productService.getCountAndListProduct(keyword, minPrice, maxPrice, sort, page);
         
         model.addAttribute("countProducts", Objs.get(0)[0]);
         model.addAttribute("ListProducts", Objs.get(1));

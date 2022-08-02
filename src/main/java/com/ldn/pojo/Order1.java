@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -30,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author three
  */
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o"),
@@ -59,6 +60,9 @@ public class Order1 implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;
+    
+    @Transient
+    private int uid;
 
     public Order1() {
     }
@@ -139,6 +143,20 @@ public class Order1 implements Serializable {
     @Override
     public String toString() {
         return "com.ldn.pojo.Order1[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the uid
+     */
+    public int getUid() {
+        return uid;
+    }
+
+    /**
+     * @param uid the uid to set
+     */
+    public void setUid(int uid) {
+        this.uid = uid;
     }
     
 }

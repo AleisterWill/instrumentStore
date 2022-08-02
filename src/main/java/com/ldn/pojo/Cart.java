@@ -12,6 +12,7 @@ package com.ldn.pojo;
 // Placeholder pojo
 public class Cart {
     private int productId;
+    private String productImage;
     private String productName;
     private Long productPrice;
     private int quantity;
@@ -70,5 +71,19 @@ public class Cart {
      */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    /**
+     * @return the productImage
+     */
+    public String getProductImage() {
+        return productImage;
+    }
+
+    /**
+     * @param productImage the productImage to set
+     */
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 }

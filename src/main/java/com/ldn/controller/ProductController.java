@@ -7,6 +7,7 @@ package com.ldn.controller;
 import com.ldn.pojo.Product;
 import com.ldn.service.CommentService;
 import com.ldn.service.ProductService;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,15 +49,23 @@ public class ProductController {
             @RequestParam(required = false) Map<String, String> params) {
         
         String s = params.getOrDefault("subCate", "0");
+        String sort = params.getOrDefault("sort", "nameASC");
         int subCateId = 0;
         try {
             subCateId = Integer.parseInt(s);
         } catch (NumberFormatException ex) {
             
         }
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        
         model.addAttribute("cateId", categoryId);
         model.addAttribute("subCateId", subCateId);
-        model.addAttribute("ListProducts", this.productService.getByCateIdAndSubCateId(categoryId, subCateId));
+        model.addAttribute("sort", sort);
+        model.addAttribute("page", page);
+        
+        List<Object[]> objs = this.productService.getByCateIdAndSubCateIdWithCount(categoryId, subCateId, sort, page);
+        model.addAttribute("ListProducts", objs.get(1));
+        model.addAttribute("countProducts", objs.get(0)[0]);
         return "productsList";
     }
 

@@ -15,6 +15,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
@@ -35,7 +36,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     private LocalSessionFactoryBean lsfb;
 
     @Override
-    public List<Object[]> getCountAndListProduct(String keyword, Long minPrice, Long maxPrice, int page) {
+    public List<Object[]> getCountAndListProduct(String keyword, Long minPrice, Long maxPrice, String sort, int page) {
         Session session = this.lsfb.getObject().getCurrentSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
@@ -53,6 +54,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         }
         cq.where(cb.and(predicates.toArray(new Predicate[predicates.size()])));
 
+        
         List<Object[]> result = new ArrayList<>();
 
         Query q;
@@ -68,6 +70,17 @@ public class ProductRepositoryImpl implements ProductRepository {
         //////////////////// Pagination
         int maxResults = 9;
         cq.multiselect(root);
+        if (sort.equals("nameASC")) {
+            cq.orderBy((cb.asc(root.get("name"))));
+
+        } else if (sort.equals("nameDESC")) {
+            cq.orderBy((cb.desc(root.get("name"))));
+        } else if (sort.equals("priceASC")) {
+            cq.orderBy(cb.asc(root.get("price")));
+        } else if (sort.equals("priceDESC")) {
+            cq.orderBy(cb.desc(root.get("price")));
+        }
+
         q = session.createQuery(cq);
         q.setMaxResults(maxResults);
         q.setFirstResult((page - 1) * maxResults);
@@ -97,7 +110,6 @@ public class ProductRepositoryImpl implements ProductRepository {
         cq.select(root);
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(cb.equal(root.get("subCategoryId"), p.getSubCategoryId()));
-        predicates.add(cb.equal(root.get("brandId"), p.getBrandId()));
         predicates.add(cb.notEqual(root.get("id").as(Integer.class), p.getId()));
 
         cq.where(cb.and(predicates.toArray(new Predicate[predicates.size()])));
@@ -124,45 +136,77 @@ public class ProductRepositoryImpl implements ProductRepository {
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<OrderDetail> cq = cb.createQuery(OrderDetail.class);
         Root root = cq.from(OrderDetail.class);
-        
+
         cq.select(root.get("productId"));
         cq.groupBy(root.get("productId"));
         cq.orderBy(cb.desc(cb.sum(root.get("quantity"))));
-        
+
         Query q = session.createQuery(cq);
         List<Product> result = q.getResultList();
-        
+
         return result;
     }
 
     @Override
-    public List<Product> getByCateIdAndSubCateId(int cateId, int subCateId) {
+    public List<Object[]> getByCateIdAndSubCateIdWithCount(int cateId, int subCateId, String sort, int page) {
         Session session = this.lsfb.getObject().getCurrentSession();
         CriteriaBuilder cb = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
-        
+
         Root rootP = cq.from(Product.class);
         Root rootSC = cq.from(SubCategory.class);
         Root rootC = cq.from(Category.class);
-        
+
         cq.multiselect(
                 rootP
         );
-        
+
         List<Predicate> pWhere = new ArrayList<>();
         pWhere.add(cb.equal(rootP.get("subCategoryId"), rootSC.get("id")));
         pWhere.add(cb.equal(rootSC.get("categoryId"), rootC.get("id")));
         pWhere.add(cb.equal(rootC.get("id"), cateId));
-        if (subCateId != 0)
+        if (subCateId != 0) {
             pWhere.add(cb.equal(rootSC.get("id"), subCateId));
-        
+        }
+
         cq.where(cb.and(pWhere.toArray(new Predicate[pWhere.size()])));
         
-        cq.orderBy(cb.desc(rootP.get("id")));
-        
-        Query q = session.createQuery(cq);
-        List<Product> result = q.getResultList();
-        
+        List<Object[]> result = new ArrayList<>();
+
+        Query q;
+
+        //////////////////// Return countList
+        cq.multiselect(cb.count(rootP.get("id")));
+        q = session.createQuery(cq);
+        List<Long> countList = q.getResultList();
+        Long[] arrCount = new Long[countList.size()];
+        arrCount = countList.toArray(arrCount);
+        result.add(arrCount);
+
+        //////////////////// Pagination
+        int maxResults = 9;
+        cq.multiselect(rootP);
+        if (sort.equals("nameASC")) {
+            cq.orderBy((cb.asc(rootP.get("name"))));
+
+        } else if (sort.equals("nameDESC")) {
+            cq.orderBy((cb.desc(rootP.get("name"))));
+        } else if (sort.equals("priceASC")) {
+            cq.orderBy(cb.asc(rootP.get("price")));
+        } else if (sort.equals("priceDESC")) {
+            cq.orderBy(cb.desc(rootP.get("price")));
+        }
+
+        q = session.createQuery(cq);
+        q.setMaxResults(maxResults);
+        q.setFirstResult((page - 1) * maxResults);
+
+        //////////////////// Return List
+        List<Product> products = q.getResultList();
+        Product[] arrProd = new Product[products.size()];
+        arrProd = products.toArray(arrProd);
+        result.add(arrProd);
+
         return result;
     }
 }
