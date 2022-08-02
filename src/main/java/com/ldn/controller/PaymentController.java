@@ -46,13 +46,13 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class PaymentController {
-    
+
     @Autowired
     private Order1Service order1Service;
-    
+
     @Autowired
     private OrderDetailService ordDtlService;
-    
+
     @Autowired
     private ProductService productService;
 
@@ -60,7 +60,7 @@ public class PaymentController {
     public String payResult(HttpServletRequest request,
             HttpSession httpSession,
             Model model) throws UnsupportedEncodingException, ParseException {
-        
+
         //Begin process return from VNPAY
         Map fields = new HashMap();
         for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
@@ -82,21 +82,22 @@ public class PaymentController {
         if (signValue.equals(vnp_SecureHash)) {
             // If OrderId doesn't exist in DB
             if (this.order1Service.getOrderById(Integer.parseInt(fields.get("vnp_TxnRef").toString())) == null) {
+                model.addAttribute("resp", fields);
                 if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
-                    model.addAttribute("TransactionStatus", "Giao dich thanh cong");
-                    
+
                     //Tao Order
                     User u = (User) httpSession.getAttribute("currentUser");
                     Order1 ord = new Order1();
                     ord.setId(Integer.parseInt(fields.get("vnp_TxnRef").toString()));
                     ord.setUid(u.getId());
-                    ord.setTotalPrice(Long.parseLong(fields.get("vnp_Amount").toString())/100);
+                    ord.setTotalPrice(Long.parseLong(fields.get("vnp_Amount").toString()) / 100);
                     ord.setStatus("Paid");
                     ord.setCreatedDate(new SimpleDateFormat("yyyyMMddHHmmss").parse(fields.get("vnp_PayDate").toString()));
                     //Them Order
-                    if (this.order1Service.addOrder(ord))
+                    if (this.order1Service.addOrder(ord)) {
                         System.out.println(" ============ Order Added ============");
-                    
+                    }
+
                     Map<Integer, Cart> cart = (Map<Integer, Cart>) httpSession.getAttribute("cart");
                     //Tao Order Detail
                     OrderDetail od = new OrderDetail();
@@ -104,27 +105,28 @@ public class PaymentController {
                     for (Cart item : cart.values()) {
                         od.setProductId(this.productService.getProductById(item.getProductId()));
                         od.setQuantity(item.getQuantity());
-                        
+
                         //Them OrderDetail moi item
                         this.ordDtlService.addOrderDetail(od);
+                        System.out.println(" ============ Order Detail Added ============");
                     }
-                } else {
-                    model.addAttribute("TransactionStatus", "Giao dich that bai");
+                    
+                    //Clear cart
+                    httpSession.removeAttribute("cart");
                 }
             } else {
-                model.addAttribute("TransactionStatus", "Giao dich da ton tai");
+                model.addAttribute("err", "Transaction ID existed in database");
             }
         } else {
-            model.addAttribute("TransactionStatus", "Loi checksum");
+            model.addAttribute("err", "Checksum Error");
         }
-
         return "vnpayreturn";
     }
 
     @PostMapping("/accounts/myCart/checkout")
     public void payUrl(HttpSession httpSession,
             HttpServletRequest req,
-            HttpServletResponse resp) throws ServletException, IOException {
+             HttpServletResponse resp) throws ServletException, IOException {
 
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
