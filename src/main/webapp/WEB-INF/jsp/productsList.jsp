@@ -61,7 +61,8 @@
                     <c:if test="${page != Math.ceil(countProducts/9)}">
                     <li class="page-item"><a class="page-link" href="${url}cate${cateId}?subCate=${subCateId}&sort=${sort}&page=${page+1}">></a></li>
                     </c:if>
-            </c:forEach>
+                </c:forEach>
+            </li>
         </ul>
     </div>
 </div>

@@ -5,9 +5,11 @@
 package com.ldn.service.serviceImpl;
 
 import com.ldn.pojo.Order1;
+import com.ldn.pojo.User;
 import com.ldn.repository.Order1Repository;
 import com.ldn.repository.UserRepository;
 import com.ldn.service.Order1Service;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,13 @@ public class Order1ServiceImpl implements Order1Service {
     public boolean addOrder(Order1 ord) {
         ord.setUserId(userRepository.getUserById(ord.getUid()));
         return this.order1Repository.addOrder(ord);
+    }
+
+    @Override
+    public List<Object[]> search(int uId, int ordId, int page) {
+        User u = new User();
+        u.setId(uId);
+        return this.order1Repository.search(u, ordId, page);
     }
     
 }

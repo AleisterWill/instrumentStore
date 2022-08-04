@@ -5,6 +5,8 @@
 package com.ldn.service;
 
 import com.ldn.pojo.OrderDetail;
+import com.ldn.pojo.User;
+import java.util.List;
 
 /**
  *
@@ -12,4 +14,5 @@ import com.ldn.pojo.OrderDetail;
  */
 public interface OrderDetailService {
     public boolean addOrderDetail(OrderDetail ordDtl);
+    public List<Object> search(int userId, int ordId);
 }

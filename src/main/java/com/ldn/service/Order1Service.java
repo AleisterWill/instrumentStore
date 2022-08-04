@@ -5,6 +5,7 @@
 package com.ldn.service;
 
 import com.ldn.pojo.Order1;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,5 @@ import com.ldn.pojo.Order1;
 public interface Order1Service {
     public Order1 getOrderById(int id);
     public boolean addOrder(Order1 ord);
+    public List<Object[]> search(int uId, int ordId, int page);
 }

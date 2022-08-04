@@ -45,11 +45,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
         <put-attribute name="CONTENT" value="/WEB-INF/jsp/myCart.jsp" />
     </definition>
     <definition name="checkout" extends="baseLayout">
-        <put-attribute name="title" value="My Cart" />
+        <put-attribute name="title" value="Checkout" />
         <put-attribute name="CONTENT" value="/WEB-INF/jsp/checkout.jsp" />
     </definition>
     <definition name="vnpayreturn" extends="baseLayout">
         <put-attribute name="title" value="Payment Result" />
         <put-attribute name="CONTENT" value="/WEB-INF/jsp/vnpayreturn.jsp" />
+    </definition>
+    <definition name="ordHistory" extends="baseLayout">
+        <put-attribute name="title" value="Order History" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/ordHistory.jsp" />
+    </definition>
+    <definition name="ordDetail" extends="baseLayout">
+        <put-attribute name="title" value="Order Detail" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/ordDetail.jsp" />
     </definition>
 </tiles-definitions>

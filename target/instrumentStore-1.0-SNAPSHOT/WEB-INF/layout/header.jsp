@@ -53,7 +53,7 @@
                         <a href="<c:url value="/accounts/setting"/>" class="dropdown-item"><i class="fa fa-cog fa-spin"></i> Chỉnh sửa tài khoản</a>
                         <hr class="w-75">
                         <a href="${url}accounts/myCart" class="dropdown-item"><i class="fa fa-shopping-cart"></i> Giỏ hàng <span class="badge badge-light" id="cartCounter">${cartCounter}</span></a>
-                        <a href="#" class="dropdown-item"><i class="fa fa-history"></i> Lịch sử đơn hàng</a>
+                        <a href="${url}accounts/orderHistory" class="dropdown-item"><i class="fa fa-history"></i> Lịch sử đơn hàng</a>
                         <hr class="w-75">
                         <a href="${url}signout" class="dropdown-item" ><i class="fa fa-sign-out"></i> Đăng xuất</a>
                     </div>

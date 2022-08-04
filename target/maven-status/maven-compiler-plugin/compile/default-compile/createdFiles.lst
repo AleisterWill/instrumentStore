@@ -1,4 +1,5 @@
 com\ldn\repository\repositoryImpl\ProductRepositoryImpl.class
+com\ldn\controller\OrdersController.class
 com\ldn\controller\SearchController.class
 com\ldn\repository\ProductRepository.class
 com\ldn\configs\TilesConfig.class

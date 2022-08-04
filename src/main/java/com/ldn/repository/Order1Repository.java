@@ -5,6 +5,8 @@
 package com.ldn.repository;
 
 import com.ldn.pojo.Order1;
+import com.ldn.pojo.User;
+import java.util.List;
 
 /**
  *
@@ -13,4 +15,5 @@ import com.ldn.pojo.Order1;
 public interface Order1Repository {
     public Order1 getOrderById(int id);
     public boolean addOrder(Order1 ord);
+    public List<Object[]> search(User userId, int ordId, int page);
 }

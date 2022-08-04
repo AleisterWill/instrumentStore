@@ -5,8 +5,10 @@
 package com.ldn.service.serviceImpl;
 
 import com.ldn.pojo.OrderDetail;
+import com.ldn.pojo.User;
 import com.ldn.repository.OrderDetailRepository;
 import com.ldn.service.OrderDetailService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,13 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     @Override
     public boolean addOrderDetail(OrderDetail ordDtl) {
         return this.ordDtlRepository.addOrderDetail(ordDtl);
+    }
+
+    @Override
+    public List<Object> search(int userId, int ordId) {
+        User u = new User();
+        u.setId(userId);
+        return this.ordDtlRepository.search(u, ordId);
     }
     
 }
