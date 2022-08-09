@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ImageSet.findAll", query = "SELECT i FROM ImageSet i"),
-    @NamedQuery(name = "ImageSet.findById", query = "SELECT i FROM ImageSet i WHERE i.id = :id"),
-    @NamedQuery(name = "ImageSet.findByDesc", query = "SELECT i FROM ImageSet i WHERE i.desc = :desc")})
+    @NamedQuery(name = "ImageSet.findById", query = "SELECT i FROM ImageSet i WHERE i.id = :id")
+})
 public class ImageSet implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,8 +42,8 @@ public class ImageSet implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Size(max = 255)
-    @Column(name = "desc")
-    private String desc;
+    @Column(name = "description")
+    private String description;
     @OneToMany(mappedBy = "imageSetId")
     private Collection<Product> productCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "imageSetId", fetch = FetchType.EAGER)
@@ -65,11 +65,11 @@ public class ImageSet implements Serializable {
     }
 
     public String getDesc() {
-        return desc;
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDesc(String description) {
+        this.description = description;
     }
 
     @XmlTransient

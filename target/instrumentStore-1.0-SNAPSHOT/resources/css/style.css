@@ -12,3 +12,22 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+@media (min-width: 768px) {
+    #vnav {
+        width: 15vw;
+        float: left;
+        top: 0;
+    }
+    
+    #vnav-content {
+        width: calc(100% - 15vw);
+        float: right;
+    }
+}
+
+@media (max-width: 768px) {
+    #vnav {
+        
+    }
+}

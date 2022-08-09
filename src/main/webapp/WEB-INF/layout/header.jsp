@@ -4,6 +4,7 @@
     Author     : three
 --%>
 
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:url value="/" var="url"/>
@@ -50,6 +51,11 @@
                         ${currentUser.lastName} ${currentUser.firstName}
                     </a>
                     <div class="dropdown-menu" aria-labelledBy="navUserDropdown">
+                        <sec:authorize access="hasAuthority('ADMIN')">
+                            <label class="text-muted w-100 text-center">ADMIN</label>
+                            <a href="<c:url value="/admin"/>" class="dropdown-item"><i class="fa fa-list-alt"></i> Trang quản lý</a>
+                            <hr class="w-75">
+                        </sec:authorize>
                         <a href="<c:url value="/accounts/setting"/>" class="dropdown-item"><i class="fa fa-cog fa-spin"></i> Chỉnh sửa tài khoản</a>
                         <hr class="w-75">
                         <a href="${url}accounts/myCart" class="dropdown-item"><i class="fa fa-shopping-cart"></i> Giỏ hàng <span class="badge badge-light" id="cartCounter">${cartCounter}</span></a>

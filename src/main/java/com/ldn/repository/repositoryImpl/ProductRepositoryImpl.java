@@ -79,6 +79,8 @@ public class ProductRepositoryImpl implements ProductRepository {
             cq.orderBy(cb.asc(root.get("price")));
         } else if (sort.equals("priceDESC")) {
             cq.orderBy(cb.desc(root.get("price")));
+        } else {
+            cq.orderBy(cb.asc(root.get("id")));
         }
 
         q = session.createQuery(cq);

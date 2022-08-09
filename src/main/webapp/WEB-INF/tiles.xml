@@ -16,48 +16,66 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
         <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
         <put-attribute name="CONTENT" value="BASE" />
     </definition>
+    <definition name="adminBase" template="/WEB-INF/layout/baseDashboard.jsp">
+        <put-attribute name="title" value="..." />
+        <put-attribute name="header" value="/WEB-INF/layout/header-admin.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+        <put-attribute name="CONTENT" value="BASE" />
+    </definition>
     <definition name="index" extends="baseLayout">
         <put-attribute name="title" value="Home Page" />
-        <put-attribute name="CONTENT" value="/WEB-INF/jsp/index.jsp" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/AllUsers/MainPage/index.jsp" />
     </definition>
     <definition name="searchView" extends="baseLayout">
         <put-attribute name="title" value="Search Result" />
-        <put-attribute name="CONTENT" value="/WEB-INF/jsp/searchResult.jsp" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/AllUsers/MainPage/searchResult.jsp" />
     </definition>
     <definition name="productDetails" extends="baseLayout">
         <put-attribute name="title" value="Product Details" />
-        <put-attribute name="CONTENT" value="/WEB-INF/jsp/productDetails.jsp" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/AllUsers/MainPage/productDetails.jsp" />
     </definition>
     <definition name="productsList" extends="baseLayout">
         <put-attribute name="title" value="List Products" />
-        <put-attribute name="CONTENT" value="/WEB-INF/jsp/productsList.jsp" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/AllUsers/MainPage/productsList.jsp" />
     </definition>
     <definition name="accounts" extends="baseLayout">
         <put-attribute name="title" value="Account Symphony!" />
-        <put-attribute name="CONTENT" value="/WEB-INF/jsp/accounts.jsp" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/AllUsers/Account/accounts.jsp" />
     </definition>
     <definition name="setting" extends="baseLayout">
         <put-attribute name="title" value="Account Symphony!" />
-        <put-attribute name="CONTENT" value="/WEB-INF/jsp/accounts-setting.jsp" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/AllUsers/Account/accounts-setting.jsp" />
     </definition>
     <definition name="myCart" extends="baseLayout">
         <put-attribute name="title" value="My Cart" />
-        <put-attribute name="CONTENT" value="/WEB-INF/jsp/myCart.jsp" />
-    </definition>
-    <definition name="checkout" extends="baseLayout">
-        <put-attribute name="title" value="Checkout" />
-        <put-attribute name="CONTENT" value="/WEB-INF/jsp/checkout.jsp" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/AllUsers/Account/myCart.jsp" />
     </definition>
     <definition name="vnpayreturn" extends="baseLayout">
         <put-attribute name="title" value="Payment Result" />
-        <put-attribute name="CONTENT" value="/WEB-INF/jsp/vnpayreturn.jsp" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/AllUsers/Account/vnpayreturn.jsp" />
     </definition>
     <definition name="ordHistory" extends="baseLayout">
         <put-attribute name="title" value="Order History" />
-        <put-attribute name="CONTENT" value="/WEB-INF/jsp/ordHistory.jsp" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/AllUsers/Account/ordHistory.jsp" />
     </definition>
     <definition name="ordDetail" extends="baseLayout">
         <put-attribute name="title" value="Order Detail" />
-        <put-attribute name="CONTENT" value="/WEB-INF/jsp/ordDetail.jsp" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/AllUsers/Account/ordDetail.jsp" />
+    </definition>
+    <definition name="adminIndex" extends="baseLayout">
+        <put-attribute name="title" value="ADMIN" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/Admin/admin-index.jsp" />
+    </definition>
+    <definition name="adminProduct" extends="adminBase">
+        <put-attribute name="title" value="ADMIN" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/Admin/admin-product.jsp" />
+    </definition>
+    <definition name="adminImgSet" extends="adminBase">
+        <put-attribute name="title" value="ADMIN" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/Admin/admin-imgSet.jsp" />
+    </definition>
+    <definition name="adminImgPath" extends="adminBase">
+        <put-attribute name="title" value="ADMIN" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/Admin/admin-imgPath.jsp" />
     </definition>
 </tiles-definitions>

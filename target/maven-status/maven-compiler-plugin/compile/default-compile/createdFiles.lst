@@ -7,13 +7,17 @@ com\ldn\pojo\Brand.class
 com\ldn\pojo\SubCategory.class
 com\ldn\controller\PaymentController.class
 com\ldn\controller\UserController.class
+com\ldn\repository\repositoryImpl\ImageSetRepositoryImpl.class
 com\ldn\controller\HomeController.class
 com\ldn\pojo\Order1.class
 com\ldn\pojo\OrderDetail_.class
+com\ldn\service\serviceImpl\ImageSetServiceImpl.class
 com\vnpay\common\vnpayRefund.class
 com\ldn\controller\ApiCartController.class
+com\ldn\repository\ImageSetRepository.class
 com\ldn\repository\UserRepository.class
 com\ldn\repository\CategoryRepository.class
+com\ldn\service\ImageSetService.class
 com\ldn\service\UserService.class
 com\ldn\repository\CommentRepository.class
 com\ldn\pojo\OrderDetail.class
@@ -37,6 +41,7 @@ com\ldn\pojo\ImagePath.class
 com\vnpay\common\ajaxServlet.class
 com\ldn\service\Order1Service.class
 com\ldn\pojo\Comment.class
+com\ldn\controller\AdminController.class
 com\ldn\service\ProductService.class
 com\ldn\pojo\Brand_.class
 com\ldn\repository\repositoryImpl\CategoryRepositoryImpl.class

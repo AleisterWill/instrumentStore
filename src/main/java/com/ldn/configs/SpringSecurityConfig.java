@@ -89,8 +89,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().accessDeniedPage("/accounts?acessDenied");
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/admin").hasAuthority("USER_ADMIN")
-                .antMatchers("/admin/**").hasAuthority("USER_ADMIN");
+                .antMatchers("/accounts").permitAll()
+                .antMatchers("/accounts/**").hasAnyAuthority("CUSTOMER", "EMPLOYEE", "ADMIN")
+                .antMatchers("/admin").hasAuthority("ADMIN")
+                .antMatchers("/admin/**").hasAuthority("ADMIN");
         http.csrf().disable();
     }
 }

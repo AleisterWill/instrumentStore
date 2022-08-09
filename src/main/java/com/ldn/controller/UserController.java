@@ -116,7 +116,7 @@ public class UserController {
         User currentUser = (User) httpSession.getAttribute("currentUser");
         if (!u.getConfirmPW().isEmpty()) {
             if (!pwEncoder.matches(u.getConfirmPW(), currentUser.getPassword())) {
-                model.addAttribute("err", "{confirmPWErr}");
+                model.addAttribute("err", "confirmPW");
             } else if (u.getConfirmNewPW().matches(u.getNewPW())) {
                 u.setId(currentUser.getId());
                 if (this.userDetailsService.updateUser(u)) {
@@ -124,13 +124,13 @@ public class UserController {
                     httpSession.removeAttribute("currentUser");
                     return "redirect:/accounts";
                 } else {
-                    model.addAttribute("err", "Da co loi xay ra");
+                    model.addAttribute("err", "unknown");
                 }
             } else {
-                model.addAttribute("err", "{confirmNewPWErr}");
+                model.addAttribute("err", "confirmNewPW");
             }
         } else {
-            model.addAttribute("err", "Phai xac nhan mat khau hien tai");
+            model.addAttribute("err", "currentPW");
         }
         model.addAttribute("user", currentUser);
         return "setting";

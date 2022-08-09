@@ -5,6 +5,3 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<footer class="alert alert-success">
-    &copy; Le Dai Nghia 2022
-</footer>

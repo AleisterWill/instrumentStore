@@ -19,10 +19,18 @@
 <c:if test="${currentUser != null}">
     <div class="ml-1 row w-100 my-5 p-md-5 shadow bg-light" style="border-radius: 50px;">
         <div class="col-md-9">
-            <c:if test="${err != null}">
-                <div class="alert alert-danger">${err}</div>
+            <c:if test="${err.equals('confirmPW')}">
+                <div class="alert alert-danger">Mật khẩu hiện tại không đúng</div>
             </c:if>
-
+            <c:if test="${err.equals('confirmNewPW')}">
+                <div class="alert alert-danger">Mật khẩu mới nhập lại không đúng</div>
+            </c:if>
+            <c:if test="${err.equals('currentPW')}">
+                <div class="alert alert-danger">Phải nhập mật khẩu hiện tại</div>
+            </c:if>
+            <c:if test="${err.equals('unknown')}">
+                <div class="alert alert-danger">Đã có lỗi xảy ra</div>
+            </c:if>
             <div class="tab-content" id="v-pills-tabContent">
 
                 <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
@@ -87,9 +95,9 @@
                     </form:form>
                 </div>
                 <div class="tab-pane fade justify-content-center" id="v-pills-avatar" role="tabpanel" aria-labelledby="v-pills-avatar-tab">
-                    <form:form action="${changeavatar}" method="post" enctype="multipart/form-data" cssClass="form-group" modelAttribute="user">
+                    <form:form action="${changeProfile}" method="post" enctype="multipart/form-data" cssClass="form-group" modelAttribute="user">
                         <div class="form-group">
-                            <form:input path="file" type="file" cssClass="form-control"/>
+                            <form:input path="file" type="file" cssClass="form-control" />
                         </div>
                         <div class="row justify-content-center mt-2">
                             <input type="submit" class="btn btn-outline-dark p-2" value="Lưu thay đổi" />

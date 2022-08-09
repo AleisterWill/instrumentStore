@@ -20,7 +20,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
         <script src="<c:url value="/js/main.js"/>"></script>
-        <script src="<c:url value="/css/main.css"/>"></script>
+        <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
 
     </head>
     <body>
