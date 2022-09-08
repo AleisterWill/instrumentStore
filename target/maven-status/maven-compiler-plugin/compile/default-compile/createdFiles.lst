@@ -12,7 +12,9 @@ com\ldn\controller\HomeController.class
 com\ldn\pojo\Order1.class
 com\ldn\pojo\OrderDetail_.class
 com\ldn\service\serviceImpl\ImageSetServiceImpl.class
+com\ldn\service\ImagePathService.class
 com\vnpay\common\vnpayRefund.class
+com\ldn\service\serviceImpl\ImagePathServiceImpl.class
 com\ldn\controller\ApiCartController.class
 com\ldn\repository\ImageSetRepository.class
 com\ldn\repository\UserRepository.class
@@ -27,6 +29,7 @@ com\ldn\configs\WebAppContextConfig.class
 com\ldn\pojo\SubCategory_.class
 com\ldn\repository\repositoryImpl\UserRepositoryImpl.class
 com\ldn\service\serviceImpl\CommentServiceImpl.class
+com\ldn\repository\BrandRepository.class
 com\vnpay\common\Config.class
 com\ldn\pojo\ImagePath_.class
 com\ldn\service\OrderDetailService.class
@@ -56,13 +59,19 @@ com\ldn\repository\repositoryImpl\Order1RepositoryImpl.class
 com\ldn\configs\handlers\SigninSuccessHandler.class
 com\ldn\pojo\Cart.class
 com\ldn\service\CommentService.class
+com\ldn\service\serviceImpl\BrandServiceImpl.class
 com\ldn\pojo\Category.class
 com\ldn\configs\SecurityWebApplicationInitializer.class
+com\ldn\repository\repositoryImpl\BrandRepositoryImpl.class
 com\ldn\pojo\User_.class
 com\ldn\configs\HibernateConfig.class
+com\ldn\service\BrandService.class
+com\ldn\controller\ApiAdminController.class
+com\ldn\repository\repositoryImpl\ImagePathRepositoryImpl.class
 com\ldn\utils\Utils.class
 com\vnpay\common\vnpayQuery.class
 com\ldn\service\serviceImpl\UserServiceImpl.class
+com\ldn\repository\ImagePathRepository.class
 com\ldn\configs\SpringSecurityConfig.class
 com\ldn\controller\CommonAttributesController.class
 com\ldn\pojo\Comment_.class

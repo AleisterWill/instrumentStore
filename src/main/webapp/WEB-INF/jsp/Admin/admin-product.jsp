@@ -9,14 +9,17 @@
 
 <div id="vnav-content" class="shadow p-md-3">
     <div class="row">
-        <form class="form form-inline">
-            <div class="form-group">
-                <label><i class="fa fa-search"></i></label>
-                <input class="form-control" name="keyword" placeholder="Tìm kiếm">
-            </div>
-        </form>
+        <div class="col-sm-12 col-md-6">
+            <form class="form">
+                <div class="form-group form-inline">
+                    <label class="col-1"><i class="fa fa-search"></i></label>
+                    <input class="form-control col-11" name="keyword" placeholder="Tìm kiếm">
+                </div>
+            </form>
+            <a href="<c:url value="/admin/product/add" />" class="btn btn-primary"><i class="fa fa-plus fa-lg"></i>  Thêm sản phẩm</a>
+        </div>
 
-        <div class="col ">
+        <div class="col-sm-12 col-md-6">
             <ul class="pagination justify-content-end">
                 <li class="page-item active">
                     <c:forEach begin="1" end="${Math.ceil(countList / 9)}" var="i">
@@ -32,23 +35,21 @@
         </div>
     </div>
 
-    <table class="table">
+    <table class="table table-responsive-sm mt-2">
         <thead>
-            <tr>
-                <td>Mã</td>
-                <td>Tên</td>
-                <td>Giá</td>
-                <td>Mô tả</td>
-                <td>Bộ Ảnh</td>
-                <td>Loại chính</td>
-                <td>Loại phụ</td>
-                <td>Thương hiệu</td>
-                <td>Action</td>
-            </tr>
+        <th>Mã</th>
+        <th>Tên</th>
+        <th>Giá</th>
+        <th>Mô tả</th>
+        <th>Bộ Ảnh</th>
+        <th>Loại chính</th>
+        <th>Loại phụ</th>
+        <th>Thương hiệu</th>
+        <th>Action</th>
         </thead>
         <tbody>
             <c:forEach items="${ListProducts}" var="p">
-                <tr>
+                <tr id="${p.id}">
                     <td>${p.id}</td>
                     <td>${p.name}</td>
                     <td>${p.price}</td>
@@ -58,8 +59,8 @@
                     <td>${p.subCategoryId.id}</td>
                     <td>${p.brandId.name}</td>
                     <td>
-                        <a class="btn btn-secondary">Edit</a>
-                        <a class="btn btn-danger">Delete</a>
+                        <a href="<c:url value="/admin/product/edit/"/>${p.id}" class="btn btn-secondary">Edit</a>
+                        <a onclick="deleteProduct(${p.id})" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             </c:forEach>

@@ -55,7 +55,7 @@
                             </div>
                             <c:if test="${i+1 < BestSellers.size()}">
                                 <div class="card col-md-4">
-                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i).getId()}">
+                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i+1).getId()}">
                                         <c:if test="${BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath() != null && BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
                                             <img src="${BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="...">
                                         </c:if>
@@ -72,7 +72,7 @@
                             </c:if>
                             <c:if test="${i+2 < BestSellers.size()}">
                                 <div class="card col-md-4">
-                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i).getId()}">
+                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i+2).getId()}">
                                         <c:if test="${BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath() != null && BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
                                             <img src="${BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="...">
                                         </c:if>
@@ -108,7 +108,7 @@
                             </div>
                             <c:if test="${i+1 < BestSellers.size()}">
                                 <div class="card col-md-4">
-                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i).getId()}">
+                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i+1).getId()}">
                                         <c:if test="${BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath() != null && BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
                                             <img src="${BestSellers.get(i+1).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="...">
                                         </c:if>
@@ -124,7 +124,7 @@
                             </c:if>
                             <c:if test="${i+2 < BestSellers.size()}">
                                 <div class="card col-md-4">
-                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i).getId()}">
+                                    <a class="h-75" href="<c:url value="/product"/>/${BestSellers.get(i+2).getId()}">
                                         <c:if test="${BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath() != null && BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath().startsWith('https')}">
                                             <img src="${BestSellers.get(i+2).getImageSetId().getImagePathCollection().get(0).getPath()}" class="card-img-top h-100" alt="...">
                                         </c:if>

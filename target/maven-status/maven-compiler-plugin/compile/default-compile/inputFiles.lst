@@ -8,11 +8,15 @@ C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\service\OrderDetailService.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\configs\handlers\SigninSuccessHandler.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\pojo\User.java
+C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\controller\ApiAdminController.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\service\Order1Service.java
+C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\service\serviceImpl\BrandServiceImpl.java
+C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\repository\BrandRepository.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\pojo\ImageSet.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\service\serviceImpl\Order1ServiceImpl.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\repository\repositoryImpl\OrderDetailRepositoryImpl.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\service\serviceImpl\CommentServiceImpl.java
+C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\service\BrandService.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\service\CommentService.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\service\ImagePathService.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\service\serviceImpl\UserServiceImpl.java
@@ -25,6 +29,7 @@ C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\vnpa
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\service\serviceImpl\CategoryServiceImpl.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\service\serviceImpl\ImagePathServiceImpl.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\controller\CommonAttributesController.java
+C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\repository\repositoryImpl\BrandRepositoryImpl.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\repository\repositoryImpl\CommentRepositoryImpl.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\service\serviceImpl\ImageSetServiceImpl.java
 C:\Users\three\Documents\NetBeansProjects\instrumentStore\src\main\java\com\ldn\service\serviceImpl\OrderDetailServiceImpl.java

@@ -14,4 +14,7 @@ import java.util.List;
  */
 public interface ImagePathRepository {
     public List<ImagePath> getByImgSetId(ImageSet imgSetId);
+    public boolean addImg(ImagePath img);
+    public boolean deleteImg(ImagePath img);
+    public boolean deleteBySetId(ImageSet imgSetId);
 }

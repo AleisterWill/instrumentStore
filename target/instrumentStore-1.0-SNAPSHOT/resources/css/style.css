@@ -16,18 +16,18 @@ footer {
 @media (min-width: 768px) {
     #vnav {
         width: 15vw;
+        height: 100%;
         float: left;
+        position: fixed;
+    }
+    
+    #vnav > * {
+        position: absolute;
         top: 0;
     }
     
     #vnav-content {
         width: calc(100% - 15vw);
         float: right;
-    }
-}
-
-@media (max-width: 768px) {
-    #vnav {
-        
     }
 }

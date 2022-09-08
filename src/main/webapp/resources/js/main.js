@@ -18,12 +18,12 @@ function addToCart(id, image, name, price) {
         headers: {
             "Content-Type": "application/json"
         }
-    }).then(function(res) {
+    }).then(function (res) {
         return res.json()
-    }).then(function(data) {
+    }).then(function (data) {
         let counter = document.getElementById('cartCounter')
         counter.innerText = data
-    }).then(function() {
+    }).then(function () {
         alert("Một sản phẩm vừa được thêm vào giỏ hàng")
     })
 }
@@ -41,9 +41,9 @@ function updateCart(obj, productId) {
         headers: {
             "Content-Type": "application/json"
         }
-    }).then(function(res) {
+    }).then(function (res) {
         return res.json()
-    }).then(function(data) {
+    }).then(function (data) {
         let counter = document.getElementById('cartCounter')
         counter.innerText = data
         cartSubTotal()
@@ -59,9 +59,9 @@ function cartSubTotal() {
         headers: {
             "Content-Type": "application/json"
         }
-    }).then(function(res) {
+    }).then(function (res) {
         return res.json()
-    }).then(function(data) {
+    }).then(function (data) {
         let subTotal = document.getElementById('subTotal')
         subTotal.innerText = numberWithCommas(data)
     })
@@ -72,19 +72,107 @@ function numberWithCommas(x) {
 }
 
 function deleteCartItem(productId) {
-    fetch('/instrumentStore/api/cart/'+productId, {
+    fetch('/instrumentStore/api/cart/' + productId, {
         method: "delete",
         body: JSON.stringify({}),
         headers: {
             "Content-Type": "application/json"
         }
-    }).then(function(res) {
+    }).then(function (res) {
         return res.json()
-    }).then(function(data) {
+    }).then(function (data) {
         let counter = document.getElementById('cartCounter')
         counter.innerText = data
         cartSubTotal()
-        let row = document.getElementById('product'+productId)
+        let row = document.getElementById('product' + productId)
         row.style.display = "none"
     })
+}
+
+function deleteImgPath(imgPathId) {
+    fetch('/instrumentStore/api/imgPath/' + imgPathId, {
+        method: "delete",
+        body: JSON.stringify({}),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {
+        return res.json()
+    }).then(function (data) {
+        if (data === true) {
+            alert('Một hình ảnh đã được xóa khỏi CSDL')
+            let row = document.getElementById(imgPathId)
+            row.style.display = "none"
+        } else {
+            alert('Đã có lỗi xảy ra')
+        }
+    })
+}
+
+function deleteImgSet(imgSetId) {
+    if (confirm('Điều này sẽ xóa tất cả ảnh của bộ ảnh!\n Bạn vẫn chắc chắn muốn xóa?')) {
+        fetch('/instrumentStore/api/imgSet/' + imgSetId, {
+            method: "delete",
+            body: JSON.stringify({}),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (res) {
+            return res.json();
+        }).then(function (data) {
+            if (data === true) {
+                alert('Một bộ ảnh đã được xóa khỏi CSDL');
+                let row = document.getElementById(imgSetId);
+                row.style.display = "none";
+            } else {
+                alert('Đã có lỗi xảy ra');
+            }
+        });
+    }
+}
+
+function deleteProduct(productId) {
+    if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi CSDL?')) {
+        fetch('/instrumentStore/api/product/' + productId, {
+            method: "delete",
+            body: JSON.stringify({}),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (res) {
+            return res.json();
+        }).then(function (data) {
+            if (data === true) {
+                alert('Một sản phẩm đã được xóa khỏi CSDL');
+                let row = document.getElementById(productId);
+                row.style.display = "none";
+            } else {
+                alert('Đã có lỗi xảy ra');
+            }
+        });
+    }
+}
+
+function insertRow() {
+    var addRow = document.getElementById('addRow');
+    var btnAdd = document.getElementById('btnAdd');
+    var btnSave = document.getElementById('btnSave');
+    var btnCancel = document.getElementById('btnCancel');
+
+    addRow.setAttribute("class", "");
+    btnAdd.setAttribute("disabled", "true");
+    btnSave.setAttribute("class", "btn btn-success mt-1 p-2");
+    btnCancel.setAttribute("class", "btn btn-secondary");
+}
+
+function cancel() {
+    var addRow = document.getElementById('addRow');
+    var btnAdd = document.getElementById('btnAdd');
+    var btnSave = document.getElementById('btnSave');
+    var btnCancel = document.getElementById('btnCancel');
+
+    addRow.setAttribute("class", "d-none");
+    btnAdd.removeAttribute("disabled");
+    btnSave.setAttribute("class", "d-none");
+    btnCancel.setAttribute("class", "d-none");
 }

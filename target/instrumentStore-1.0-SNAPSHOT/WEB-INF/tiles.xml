@@ -78,4 +78,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this 
         <put-attribute name="title" value="ADMIN" />
         <put-attribute name="CONTENT" value="/WEB-INF/jsp/Admin/admin-imgPath.jsp" />
     </definition>
+    <definition name="adminProductAdd" extends="adminBase">
+        <put-attribute name="title" value="ADMIN" />
+        <put-attribute name="CONTENT" value="/WEB-INF/jsp/Admin/admin-product-add.jsp" />
+    </definition>
 </tiles-definitions>

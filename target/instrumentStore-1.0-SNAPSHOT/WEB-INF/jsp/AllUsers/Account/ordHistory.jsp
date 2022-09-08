@@ -16,18 +16,18 @@
 </form>
 <table class="table table-striped text-center">
     <thead>
-        <tr>
-            <td>Mã đơn</td>
-            <td>Tổng tiền</td>
-            <td>Ngày thanh toán</td>
-            <td>Chi tiết</td>
-        </tr>
+            <th>Mã đơn</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Ngày tạo</th>
+            <th>Chi tiết</th>
     </thead>
     <tbody>
         <c:forEach items="${ListOrders}" var="o">
             <tr>
                 <td>${o.id}</td>
                 <td>${o.totalPrice}</td>
+                <td>${o.status}</td>
                 <td>${o.createdDate}</td>
                 <td><a href="<c:url value="/accounts/orderHistory"/>/${o.id}">Xem chi tiết</a></td>
             </tr>

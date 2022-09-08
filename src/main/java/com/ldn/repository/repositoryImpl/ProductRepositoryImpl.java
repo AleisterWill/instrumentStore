@@ -5,6 +5,7 @@
 package com.ldn.repository.repositoryImpl;
 
 import com.ldn.pojo.Category;
+import com.ldn.pojo.ImageSet;
 import com.ldn.pojo.OrderDetail;
 import com.ldn.pojo.Product;
 import com.ldn.pojo.SubCategory;
@@ -15,9 +16,11 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -54,7 +57,6 @@ public class ProductRepositoryImpl implements ProductRepository {
         }
         cq.where(cb.and(predicates.toArray(new Predicate[predicates.size()])));
 
-        
         List<Object[]> result = new ArrayList<>();
 
         Query q;
@@ -172,7 +174,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         }
 
         cq.where(cb.and(pWhere.toArray(new Predicate[pWhere.size()])));
-        
+
         List<Object[]> result = new ArrayList<>();
 
         Query q;
@@ -211,4 +213,61 @@ public class ProductRepositoryImpl implements ProductRepository {
 
         return result;
     }
+
+    @Override
+    public boolean addProduct(Product p) {
+        Session session = this.lsfb.getObject().getCurrentSession();
+        try {
+            session.save(p);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteProduct(Product p) {
+        Session session = this.lsfb.getObject().getCurrentSession();
+        try {
+            session.remove(p);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateProduct(Product p) {
+        Session session = this.lsfb.getObject().getCurrentSession();
+        try {
+            session.update(p);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean undefineImgSet(ImageSet imgSetId) {
+        try {
+            Session session = this.lsfb.getObject().getCurrentSession();
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaUpdate<Product> cu = cb.createCriteriaUpdate(Product.class);
+
+            Root rootP = cu.from(Product.class);
+            cu.where(cb.equal(rootP.get("imageSetId"), imgSetId));
+            cu.set(rootP.get("imageSetId"), new ImageSet(999999999));
+
+            Query q = session.createQuery(cu);
+            q.executeUpdate();
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
 }

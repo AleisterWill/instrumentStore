@@ -10,8 +10,10 @@ import com.ldn.repository.ImagePathRepository;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -50,4 +52,50 @@ public class ImagePathRepositoryImpl implements ImagePathRepository {
         
         return result;
     }
+
+    @Override
+    public boolean addImg(ImagePath img) {
+        Session session = this.lsfb.getObject().getCurrentSession();
+        try {
+            session.save(img);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteImg(ImagePath imgPathId) {
+        Session session = this.lsfb.getObject().getCurrentSession();
+        try {
+            session.delete(imgPathId);
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteBySetId(ImageSet imgSetId) {
+        Session session = this.lsfb.getObject().getCurrentSession();
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaDelete<ImagePath> cd = cb.createCriteriaDelete(ImagePath.class);
+        Root root = cd.from(ImagePath.class);
+        
+        cd.where(cb.equal(root.get("imageSetId"), imgSetId));
+        
+        try {
+            Query q = session.createQuery(cd);
+            q.executeUpdate();
+            return true;
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    
+    
 }

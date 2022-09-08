@@ -6,6 +6,7 @@ package com.ldn.pojo;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -48,10 +50,10 @@ public class Product implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 45, message = "{product.name.lengthErr}")
     @Column(name = "name")
     private String name;
-    @Size(max = 18000)
+    @Size(max = 18000, message = "{product.description.lengthErr}")
     @Column(name = "description")
     private String description;
     @Basic(optional = false)
@@ -62,6 +64,9 @@ public class Product implements Serializable {
     @NotNull
     @Column(name = "in_stock")
     private int inStock;
+    @Basic(optional = false)
+    @Column(name = "created_date")
+    private Date createdDate;
     @JoinColumn(name = "brand_id", referencedColumnName = "id")
     @ManyToOne
     private Brand brandId;
@@ -76,6 +81,17 @@ public class Product implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private Collection<OrderDetail> orderDetailCollection;
 
+    
+    @NotNull(message = "{input.nullErr}")
+    @Transient
+    private String brandid;
+    @NotNull(message = "{input.nullErr}")
+    @Transient
+    private String imgsetid;
+    @NotNull(message = "{input.nullErr}")
+    @Transient
+    private String subcatid;
+    
     public Product() {
     }
 
@@ -195,6 +211,62 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "com.ldn.pojo.Product[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the createdDate
+     */
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    /**
+     * @param createdDate the createdDate to set
+     */
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    /**
+     * @return the brandid
+     */
+    public String getBrandid() {
+        return brandid;
+    }
+
+    /**
+     * @param brandid the brandid to set
+     */
+    public void setBrandid(String brandid) {
+        this.brandid = brandid;
+    }
+
+    /**
+     * @return the imgsetid
+     */
+    public String getImgsetid() {
+        return imgsetid;
+    }
+
+    /**
+     * @param imgsetid the imgsetid to set
+     */
+    public void setImgsetid(String imgsetid) {
+        this.imgsetid = imgsetid;
+    }
+
+    /**
+     * @return the subcatid
+     */
+    public String getSubcatid() {
+        return subcatid;
+    }
+
+    /**
+     * @param subcatid the subcatid to set
+     */
+    public void setSubcatid(String subcatid) {
+        this.subcatid = subcatid;
     }
     
 }

@@ -16,7 +16,7 @@
                 <h3 class="text-center"><i class="fa fa-2x fa-times-circle text-danger"></i></h3>
                 <h3 class="display-5 text-center">Giao dịch thất bại</h3>
                 <h6 class="text-center text-muted">
-                    Kết quả giao dịch đã hủy bỏ
+                    Kết quả giao dịch đã tạm lưu để đối chiếu
                 </h6>
             </c:otherwise>
         </c:choose>

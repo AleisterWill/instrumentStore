@@ -83,40 +83,48 @@ public class PaymentController {
             // If OrderId doesn't exist in DB
             if (this.order1Service.getOrderById(Integer.parseInt(fields.get("vnp_TxnRef").toString())) == null) {
                 model.addAttribute("resp", fields);
+
+                //Tao Order
+                User u = (User) httpSession.getAttribute("currentUser");
+                Order1 ord = new Order1();
+                ord.setId(Integer.parseInt(fields.get("vnp_TxnRef").toString()));
+                ord.setUid(u.getId());
+                ord.setTotalPrice(Long.parseLong(fields.get("vnp_Amount").toString()) / 100);
+                ord.setCreatedDate(new SimpleDateFormat("yyyyMMddHHmmss").parse(fields.get("vnp_PayDate").toString()));
+
+                //Thanh toan thanh cong
                 if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
-
-                    //Tao Order
-                    User u = (User) httpSession.getAttribute("currentUser");
-                    Order1 ord = new Order1();
-                    ord.setId(Integer.parseInt(fields.get("vnp_TxnRef").toString()));
-                    ord.setUid(u.getId());
-                    ord.setTotalPrice(Long.parseLong(fields.get("vnp_Amount").toString()) / 100);
-                    ord.setStatus("Paid");
-                    ord.setCreatedDate(new SimpleDateFormat("yyyyMMddHHmmss").parse(fields.get("vnp_PayDate").toString()));
-                    //Them Order
-                    if (this.order1Service.addOrder(ord)) {
-                        System.out.println(" ============ Order Added ============");
-                    }
-
-                    Map<Integer, Cart> cart = (Map<Integer, Cart>) httpSession.getAttribute("cart");
-                    //Tao Order Detail
-                    OrderDetail od = new OrderDetail();
-                    od.setOrderId(ord);
-                    for (Cart item : cart.values()) {
-                        od.setProductId(this.productService.getProductById(item.getProductId()));
-                        od.setQuantity(item.getQuantity());
-
-                        //Them OrderDetail moi item
-                        this.ordDtlService.addOrderDetail(od);
-                        System.out.println(" ============ Order Detail Added ============");
-                    }
-                    
-                    //Clear cart
-                    httpSession.removeAttribute("cart");
+                    ord.setStatus("Success (Paid)");
+                } else if ("24".equals(request.getParameter("vnp_ResponseCode"))) {
+                    ord.setStatus("Failed (Cancelled)");
+                } else {
+                    ord.setStatus("Failed (Unknown error)");
                 }
-            } else {
+
+                //Them Order
+                if (this.order1Service.addOrder(ord)) {
+                    System.out.println(" ============ Order Added ============");
+                }
+
+                Map<Integer, Cart> cart = (Map<Integer, Cart>) httpSession.getAttribute("cart");
+                //Tao Order Detail
+                OrderDetail od = new OrderDetail();
+                od.setOrderId(ord);
+                for (Cart item : cart.values()) {
+                    od.setProductId(this.productService.getProductById(item.getProductId()));
+                    od.setQuantity(item.getQuantity());
+
+                    //Them OrderDetail moi item
+                    this.ordDtlService.addOrderDetail(od);
+                    System.out.println(" ============ Order Detail Added ============");
+                }
+
+                //Clear cart
+                httpSession.removeAttribute("cart");
+            } else { //
                 model.addAttribute("err", "Transaction ID existed in database");
             }
+
         } else {
             model.addAttribute("err", "Checksum Error");
         }
@@ -126,7 +134,7 @@ public class PaymentController {
     @PostMapping("/accounts/myCart/checkout")
     public void payUrl(HttpSession httpSession,
             HttpServletRequest req,
-             HttpServletResponse resp) throws ServletException, IOException {
+            HttpServletResponse resp) throws ServletException, IOException {
 
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";

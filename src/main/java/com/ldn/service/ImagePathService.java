@@ -13,5 +13,7 @@ import java.util.List;
  */
 public interface ImagePathService {
     public List<ImagePath> getByImgSetId(int imgSetId);
-    
+    public boolean addImg(ImagePath img);
+    public boolean deleteImg(int imgPathId);
+    public boolean deleteBySetId(Integer imgSetId);
 }

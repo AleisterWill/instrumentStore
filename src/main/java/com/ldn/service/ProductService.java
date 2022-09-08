@@ -17,4 +17,8 @@ public interface ProductService {
     public List<Product> getListRandomRelateProducts(Product p, int maxResults);
     public List<Product> getListBestSellers();
     public List<Object[]> getByCateIdAndSubCateIdWithCount(int cateId, int subCateId, String sort, int page);
+    
+    public boolean addProduct(Product p);
+    public boolean deleteProduct(Integer p);
+    public boolean updateProduct(Product p);
 }
